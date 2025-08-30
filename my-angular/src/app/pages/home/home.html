@@ -4,6 +4,8 @@
     Категорії наразі відсутні.
   </div>
 
+  <a class="btn btn-primary mb-3" routerLink="/category/create">Додати</a>
+
   <!-- Вивід карток, якщо є категорії -->
   <div class="row" *ngIf="categories.length > 0">
     <div *ngFor="let category of categories" class="col-md-3 mb-4">

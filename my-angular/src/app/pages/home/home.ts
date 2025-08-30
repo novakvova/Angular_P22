@@ -3,10 +3,11 @@ import {CategoryService} from '../../services/category.service';
 import {Category} from '../../models/Category';
 import {CommonModule} from '@angular/common';
 import {environment} from '../../../environments/environment';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

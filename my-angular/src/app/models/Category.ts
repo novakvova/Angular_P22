@@ -3,3 +3,9 @@ export interface Category {
   name: string;
   image: string;
 }
+
+export interface ICategoryCreate {
+  name: string;
+  slug: string;
+  imageFile?: File | null;
+}
