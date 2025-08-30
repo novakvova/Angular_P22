@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../services/category.service';
 import {Category} from '../../models/Category';
 import {CommonModule} from '@angular/common';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -28,4 +29,6 @@ export class Home implements OnInit {
       console.log("categories", categories);
     });
   }
+
+  protected readonly environment = environment;
 }
