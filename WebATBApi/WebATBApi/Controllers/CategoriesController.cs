@@ -1,24 +1,54 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Interfaces;
+using Core.Models.Category;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebATBApi.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoriesController : ControllerBase
-    {
-        [HttpGet]
-        public IActionResult GetCategories()
-        {
-            var категорії = new[]
-            {
-                new { Id = 1, Name = "Напої безалкогольні", Image = "https://src.zakaz.atbmarket.com/cache/category/Безалкогольні напої.webp" },
-                new { Id = 2, Name = "Овочі та фрукти", Image = "https://src.zakaz.atbmarket.com/cache/category/Овочі та фрукти.webp" },
-                new { Id = 3, Name = "Морозиво", Image = "https://src.zakaz.atbmarket.com/cache/category/334-morozivo.webp" },
-                new { Id = 4, Name = "Заморожені продукти", Image = "https://src.zakaz.atbmarket.com/cache/category/Заморожені вироби.webp" }
-            };
+namespace WebATBApi.Controllers;
 
-            return Ok(категорії);
-        }
+[Route("api/[controller]")]
+[ApiController]
+public class CategoriesController(ICategoriesService categoriesService) : Controller
+{
+    [HttpGet("list")]
+    public async Task<IActionResult> List()
+    {
+        var model = await categoriesService.GetAllAsync();
+
+        return Ok(model);
+    }
+
+    [HttpPost("create")]
+    //[Authorize(Roles = Roles.Admin)]
+    public async Task<IActionResult> Create([FromForm] CategoryCreateModel model)
+    {
+        var result = await categoriesService.CreateAsync(model);
+
+        return Ok(result);
+    }
+
+    [HttpPut("update")]
+    //[Authorize(Roles = Roles.Admin)]
+    public async Task<IActionResult> Update([FromForm] CategoryEditModel model)
+    {
+        var result = await categoriesService.UpdateAsync(model);
+
+        return Ok(result);
+    }
+
+    [HttpGet("{slug}")]
+    public async Task<IActionResult> GetBySlug(string slug)
+    {
+        var result = await categoriesService.GetBySlugAsync(slug);
+
+        return Ok(result);
+    }
+
+    [HttpDelete("delete")]
+    //[Authorize(Roles = Roles.Admin)]
+    public async Task<IActionResult> Delete([FromBody] CategoryDeleteModel model)
+    {
+        await categoriesService.DeleteAsync(model);
+        return Ok($"Category with id: {model.Id} deleted");
     }
 }
+
