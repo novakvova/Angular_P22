@@ -76,7 +76,6 @@ export class CategoryCreate {
 
     this.categoryService.createCategory(formData).subscribe({
       next: (res) => {
-        this.imagePreview = null;
         this.router.navigate(['/']);
       },
       error: (err) => {
