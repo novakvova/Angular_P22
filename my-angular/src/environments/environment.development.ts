@@ -1,7 +1,7 @@
-const baseUrl = 'http://localhost:5242/';
+const baseUrl = 'http://localhost:5059';
 
 export const environment = {
   production: false,
-  apiUrl: `${baseUrl}api/`,
-  imagePath: `${baseUrl}images/`
+  apiURL: `${baseUrl}/api/`,
+  imagePath: `${baseUrl}/images/`
 };

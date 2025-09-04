@@ -1,7 +1,7 @@
-const baseUrl = 'http://myhost.com/';
+const baseUrl = 'https://test.com/api';
 
 export const environment = {
-  production: false,
-  apiUrl: `${baseUrl}api/`,
-  imagePath: `${baseUrl}images/`
+  production: true,
+  apiURL: `${baseUrl}/api/`,
+  imagePath: `${baseUrl}/images/`
 };

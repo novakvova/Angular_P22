@@ -1,25 +1,40 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Category} from '../models/Category';
-import {environment} from '../../environments/environment';
+import {ICategory, ICategoryCreate} from '../models/Category';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CategoryService {
+  private apiURL = environment.apiURL;
+  constructor(private http: HttpClient) {}
 
-  private apiUrl = `${environment.apiUrl}categories/`;
-
-  constructor(private http: HttpClient) { }
-
-  getCategories() : Observable<Category[]> {
-    return this.http.get<Category[]>(this.apiUrl + 'list');
+  getCategories() : Observable<ICategory[]> {
+    return this.http.get<ICategory[]>(this.apiURL + "categories/list");
   }
 
   createCategory(formData: FormData) {
-    return this.http.post(this.apiUrl + "create", formData);
+
+    return this.http.post(this.apiURL + "categories/create", formData);
   }
 
+  deleteCategory(id: number) {
+
+    return this.http.delete(this.apiURL + "categories/delete/", {
+      body: { id }
+    });
+  }
+
+  getCategoryBySlug(slug: string) : Observable<ICategory> {
+
+    return this.http.get<ICategory>(this.apiURL + "categories/" + slug);
+  }
+
+  editCategory(formData: FormData) {
+
+    return this.http.put(this.apiURL + "categories/edit", formData);
+  }
 }

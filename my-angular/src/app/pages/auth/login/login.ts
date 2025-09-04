@@ -10,12 +10,10 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './login.css'
 })
 export class Login {
-  //Зберігає логін та пароль користувача
   email: string = '';
   password: string = '';
 
   login() {
-    console.log("Login user data", this.email, this.password);
+    console.log("Login", this.email, this.password);
   }
-
 }
