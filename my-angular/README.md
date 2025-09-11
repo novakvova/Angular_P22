@@ -10,6 +10,22 @@ To start a local development server, run:
 ng serve
 ```
 
+```
+docker build -t angular-p22 .
+
+docker run -d --restart=always --name angular-p22-container -p 4080:80 angular-p22
+
+docker tag angular-p22:latest novakvova/angular-p22-api:0.2
+
+docker push novakvova/angular-p22-api:0.2
+
+docker pull novakvova/angular-p22-api:0.2
+
+docker run -d --restart=always --name angular-p22-container -p 4080:80 novakvova/angular-p22-api:0.2
+
+
+```
+
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding
